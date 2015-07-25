@@ -1,0 +1,5 @@
+(function() {
+	Ext.onReady(function() {
+		
+	});
+})();
