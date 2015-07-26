@@ -27,7 +27,14 @@ public class UserService
 			rs = ps.executeQuery();
 			while (rs.next())
 			{
-				UserModel u = new UserModel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4));
+				UserModel u = new UserModel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getDate(5), rs.getDouble(6));
+				if (rs.getInt(7) == 1)
+				{
+					u.setiT(true);
+				} else
+				{
+					u.setiT(false);
+				}
 				root.add(u);
 			}
 			rs.close();

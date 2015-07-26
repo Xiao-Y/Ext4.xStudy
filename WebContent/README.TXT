@@ -26,8 +26,30 @@ Ext.data.proxy.Proxy 代理类的根类（分为客户端（Client）代理和�
 		Ext.data.proxy.Direct 命令
 		3+方式的代理
 
-
-
+2.ExtJs4.x的MVC架构
+account_manager
+	-app
+		-controller
+			Users.js
+		-model
+			User.js
+		-store
+			Users.js
+		-view
+			-user
+				Edit.js
+				List.js
+			Viewport.js
+	-data
+		updateUsers.json
+		users.json
+	-ext
+		-resource
+		-src
+		ext-debug.js
+		ext.js
+	app.js
+	index.html
 
 
 

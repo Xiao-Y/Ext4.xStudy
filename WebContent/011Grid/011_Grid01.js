@@ -43,8 +43,7 @@
 				icon : '../js/extJs/icons/table/table_delete.png',
 				handler : function(o) {// 单击事件
 					// 方法一：findParentByType 根据类型找到父级
-					// var grid =
-					// o.findParentByType('gridpanel');//得到grid,其实外面已经定义了名称，可以直接使用
+					// var grid = o.findParentByType('gridpanel');//得到grid,其实外面已经定义了名称，可以直接使用
 					// 方法二：ownerCt找到父级
 					// alert(grid.getStore().getCount());
 					var data = grid.getSelectionModel();// 得到选择模式

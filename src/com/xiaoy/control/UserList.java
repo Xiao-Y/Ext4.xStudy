@@ -2,6 +2,7 @@ package com.xiaoy.control;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,9 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 import com.xiaoy.model.UserModel;
 import com.xiaoy.service.UserService;
+import com.xiaoy.util.JsonDateValueProcessor;
 
 @WebServlet("/userList")
 public class UserList extends HttpServlet
@@ -53,8 +56,11 @@ public class UserList extends HttpServlet
 		rootMap.put("root", list);
 		rootMap.put("total", total);
 
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());
+		
 		JSONObject json = new JSONObject();
-		JSONObject jsonObject = json.fromObject(rootMap);
+		JSONObject jsonObject = json.fromObject(rootMap, jsonConfig);
 		writer.write(jsonObject.toString());
 		writer.close();
 	}
