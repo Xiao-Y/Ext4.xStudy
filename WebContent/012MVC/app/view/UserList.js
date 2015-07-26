@@ -6,8 +6,11 @@ Ext.define('AM.view.UserList', {
 	height : 280,
 	frame : true,// 面板渲染
 	store : 'UsersStore',// 加载数据
-	selType : 'checkboxmodel',// 选择模式
+	selType : 'checkboxmodel',// 复选框选择模式
+	// selType : 'rowmodel',// 行选择模式
 	multiSelect : true,// 允许多选
+	// selType : 'cellmodel',// 单元格择模式
+
 	columns : [ {
 		xtype : 'rownumberer',
 		header : '序号',
@@ -34,9 +37,9 @@ Ext.define('AM.view.UserList', {
 		renderer : function(value) {
 			if (value) {
 				if (value == '女') {
-					return "<font color='green'>"+value+"</font>";
+					return "<font color='green'>" + value + "</font>";
 				} else if (value == '男') {
-					return "<font color='red'>"+value+"</font>";
+					return "<font color='red'>" + value + "</font>";
 				}
 			}
 		}
@@ -86,6 +89,16 @@ Ext.define('AM.view.UserList', {
 	}, {
 		xtype : 'button',
 		text : '查看',
+		icon : '../js/extJs/icons/used/zoom_in.png'
+	}, {
+		xtype : 'button',
+		text : '保存',
+		id : 'saveUser',
+		icon : '../js/extJs/icons/table/table_save.png'
+	}, {
+		xtype : 'button',
+		text : 'selection',
+		id : 'selection',
 		icon : '../js/extJs/icons/table/table.png'
 	} ],
 	// 一个或者一系列组件作为挂靠组件被添加到panel中
