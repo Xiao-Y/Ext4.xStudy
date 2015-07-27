@@ -2,7 +2,7 @@ Ext.define('AM.view.UserList', {
 	extend : 'Ext.grid.Panel',
 	alias : 'widget.userList',
 	title : '用户信息列表',// 标题
-	width : 500,
+	width : 1000,
 	height : 300,
 	frame : true,// 面板渲染
 	store : 'UsersStore',// 加载数据
@@ -22,12 +22,12 @@ Ext.define('AM.view.UserList', {
 	}, {
 		header : 'Name',
 		dataIndex : 'name'// ,
-		// 列锁定,在单元格编辑模式下不能使用
-		// locked : true
+	// 列锁定,在单元格编辑模式下不能使用
+	// locked : true
 	}, {
 		header : 'Age',
 		dataIndex : 'age',
-		width : 50// ,
+		width : 50,
 		field : {// 双击编辑
 			xtype : 'textfield',
 			allowBlank : false
