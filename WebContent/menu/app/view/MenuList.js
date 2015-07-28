@@ -6,7 +6,6 @@ Ext.define('AM.view.MenuList', {
 	height : 300,
 	frame : true,// 面板渲染
 	store : 'MenuStore',// 加载数据
-	renderTo : 'GridDemo', // 渲染到一个div上
 	selType : 'checkboxmodel',// 复选框选择模式
 	multiSelect : true,// 允许多选
 
@@ -20,12 +19,12 @@ Ext.define('AM.view.MenuList', {
 		width : 50
 	}, {
 		header : '菜单名称',
-		dataIndex : 'menuName',
-		locked : true
+		dataIndex : 'menuName'// ,
+	// locked : true
 	}, {
 		header : '请求路径',
 		dataIndex : 'menuUrl',
-		width : 50
+		width : 200
 	}, {
 		header : '父级ID',
 		dataIndex : 'parentId',
@@ -34,12 +33,12 @@ Ext.define('AM.view.MenuList', {
 		xtype : 'datecolumn',
 		header : '创建时间',
 		format : 'Y-m-d H:i:s',// 格式化
-		width : 50,
+		width : 150,
 		dataIndex : 'createTime'
 	}, {
 		xtype : 'datecolumn',
 		header : '更新时间',
-		width : 50,
+		width : 150,
 		dataIndex : 'updateTime',
 		format : 'Y-m-d H:i:s'// 格式化
 	}, {
@@ -50,10 +49,10 @@ Ext.define('AM.view.MenuList', {
 	tbar : [ {
 		xtype : 'button',
 		text : '添加',
+		id : 'addMenu',
 		icon : '../js/extJs/icons/table/table_add.png'
 	}, {
 		xtype : 'button',
-		id : 'delUser',
 		text : '删除',
 		icon : '../js/extJs/icons/table/table_delete.png',
 	}, {

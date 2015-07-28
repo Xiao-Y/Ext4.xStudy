@@ -16,7 +16,7 @@ Ext.onReady(function() {
 					xtype : 'menuList',//使用的别名
 					title : '菜单列表',
 					html : '菜单列表'
-				} ]
+				}]
 			});
 		},
 		controllers:['MenuController']

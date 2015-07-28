@@ -1,18 +1,18 @@
 Ext.define('AM.store.MenuStore', {
-	extdent : 'Ext.data.Store',
+	extend : 'Ext.data.Store',
 	model : 'AM.model.MenuModel',
-	pageSize : 15,
+	pageSize : 5,
 	proxy : {
 		url : '',
-		type : 'ajax',
+		type : 'ajax',// 写成了JSON
 		reader : {
 			type : 'json',
 			root : 'root',
-			totalProperty : 'totle'
+			totalProperty : 'total'
 		},
 		writer : {
 			type : 'json'
-		},
-		autoLoad : true
-	}
+		}
+	},
+	autoLoad : true
 });
