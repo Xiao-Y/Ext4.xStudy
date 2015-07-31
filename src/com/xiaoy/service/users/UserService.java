@@ -1,4 +1,4 @@
-package com.xiaoy.service;
+package com.xiaoy.service.users;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

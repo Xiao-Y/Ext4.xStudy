@@ -1,4 +1,4 @@
-package com.xiaoy.control;
+package com.xiaoy.control.users;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -20,7 +20,7 @@ import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
 import com.xiaoy.model.UserModel;
-import com.xiaoy.service.UserService;
+import com.xiaoy.service.users.UserService;
 import com.xiaoy.util.JsonDateValueProcessor;
 
 @WebServlet("/userList")

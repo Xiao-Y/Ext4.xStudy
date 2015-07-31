@@ -3,12 +3,13 @@ Ext.define('AM.view.MenuList', {
 	alias : 'widget.menuList',
 	title : '菜单列表',// 标题
 	width : 1000,
-	height : 300,
-	frame : true,// 面板渲染
+	height : 500,
+	renderTo : 'GridDemo',
+	// layout: 'border',
+	//frame : true,// 面板渲染
 	store : 'MenuStore',// 加载数据
 	selType : 'checkboxmodel',// 复选框选择模式
 	multiSelect : true,// 允许多选
-
 	columns : [ {
 		xtype : 'rownumberer',
 		header : '序号',
@@ -16,35 +17,49 @@ Ext.define('AM.view.MenuList', {
 	}, {
 		header : 'ID',
 		dataIndex : 'id',
-		width : 50
+		width : 120
 	}, {
 		header : '菜单名称',
-		dataIndex : 'menuName'// ,
+		dataIndex : 'menuName',
+		width : 150
+	// ,
 	// locked : true
 	}, {
 		header : '请求路径',
 		dataIndex : 'menuUrl',
-		width : 200
+		width : 150
 	}, {
 		header : '父级ID',
 		dataIndex : 'parentId',
-		width : 50
+		width : 120
 	}, {
-		xtype : 'datecolumn',
+		header : '节点类型',
+		dataIndex : 'menuType',
+		renderer : function(value) {
+			if (value == '0') {
+				return '树枝节点';
+			}
+			if (value == '1') {
+				return '叶子节点';
+			}
+		},
+		width : 100
+	}, {
+		// xtype : 'datecolumn',
 		header : '创建时间',
 		format : 'Y-m-d H:i:s',// 格式化
-		width : 150,
-		dataIndex : 'createTime'
+		dataIndex : 'createTime',
+		width : 180
 	}, {
-		xtype : 'datecolumn',
+		// xtype : 'datecolumn',
 		header : '更新时间',
-		width : 150,
 		dataIndex : 'updateTime',
-		format : 'Y-m-d H:i:s'// 格式化
+		format : 'Y-m-d H:i:s',// 格式化
+		width : 180
 	}, {
 		header : '备注',
 		dataIndex : 'remark',
-		width : 150
+		width : 300
 	} ],
 	tbar : [ {
 		xtype : 'button',
@@ -61,7 +76,7 @@ Ext.define('AM.view.MenuList', {
 		icon : '../js/extJs/icons/table/table_edit.png',
 	}, {
 		xtype : 'button',
-		text : '查看',
+		text : '高级查询',
 		icon : '../js/extJs/icons/used/zoom_in.png'
 	} ],
 	// 一个或者一系列组件作为挂靠组件被添加到panel中

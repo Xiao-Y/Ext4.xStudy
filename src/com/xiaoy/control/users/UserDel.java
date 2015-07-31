@@ -1,4 +1,4 @@
-package com.xiaoy.control;
+package com.xiaoy.control.users;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import com.xiaoy.service.UserService;
+import com.xiaoy.service.users.UserService;
 
 /**
  * Servlet implementation class UserDel

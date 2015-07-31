@@ -1,10 +1,10 @@
 Ext.define('AM.store.MenuStore', {
 	extend : 'Ext.data.Store',
 	model : 'AM.model.MenuModel',
-	pageSize : 5,
+	pageSize : 10,
 	proxy : {
-		url : '',
-		type : 'ajax',// 写成了JSON
+		url : '../MenuList',
+		type : 'ajax',
 		reader : {
 			type : 'json',
 			root : 'root',
