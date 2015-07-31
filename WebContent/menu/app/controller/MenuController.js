@@ -1,7 +1,7 @@
 Ext.define('AM.controller.MenuController', {
 	extend : 'Ext.app.Controller',
 	views : [ 'MenuList', 'MenuAdd' ],
-	stores : [ 'MenuStore','ParentMenuStore' ],
+	stores : [ 'MenuStore', 'ParentMenuStore' ],
 	models : [ 'MenuModel' ],
 	init : function() {
 		this.control({
@@ -18,6 +18,10 @@ Ext.define('AM.controller.MenuController', {
 						} ]
 					}).show();
 				}
+			},
+			// 删除
+			'menuList button[id=delMenu]' : {
+				click : this.delMenu
 			},
 			// 取消
 			'menuAdd button[id=cancelMenu]' : {
@@ -66,5 +70,35 @@ Ext.define('AM.controller.MenuController', {
 		var saveFormPanel = btn.up('form');
 		var baseForm = saveFormPanel.getForm();
 		baseForm.reset();
+	},
+	// 删除
+	delMenu : function() {
+		var sm = Ext.getCmp('menuList').getSelectionModel();
+		if (!sm.hasSelection()) {
+			Ext.Msg.alert('提示', '请选择要删除的行');
+			return;
+		}
+
+		Ext.Msg.confirm('提示', '确定要删除所选的行？', function(btn) {
+			if (btn == 'yes') {
+				var sel = sm.getSelection();
+				var selectedId = sel[0].data.id;
+				Ext.Ajax.request({
+					url : '../MenuDel',
+					method : 'POST',
+					async : false,
+					params : {
+						id : selectedId
+					},
+					success : function(resopnse) {
+						var jsonObj = Ext.JSON.decode(resopnse.responseText);
+						Ext.Msg.alert('提示', jsonObj.message);
+						if (jsonObj.success == true) {
+							Ext.getCmp('menuList').getStore().reload();// 刷新表格
+						}
+					}
+				});
+			}
+		});
 	}
 });

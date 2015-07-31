@@ -4,17 +4,20 @@ Ext.define('AM.view.MenuList', {
 	title : '菜单列表',// 标题
 	width : 1000,
 	height : 500,
+	id : 'menuList',
 	renderTo : 'GridDemo',
-	// layout: 'border',
-	//frame : true,// 面板渲染
+	// layout : 'border',
+	// frame : true,// 面板渲染
 	store : 'MenuStore',// 加载数据
 	selType : 'checkboxmodel',// 复选框选择模式
-	multiSelect : true,// 允许多选
-	columns : [ {
-		xtype : 'rownumberer',
-		header : '序号',
-		width : 50
-	}, {
+	// multiSelect : true,// 允许多选
+	columns : [ 
+	// {
+	// xtype : 'rownumberer',
+	// header : '序号',
+	// width : 50
+	//	}, 
+	{
 		header : 'ID',
 		dataIndex : 'id',
 		width : 120
@@ -23,7 +26,7 @@ Ext.define('AM.view.MenuList', {
 		dataIndex : 'menuName',
 		width : 150
 	// ,
-	// locked : true
+	// locked : true//锁定
 	}, {
 		header : '请求路径',
 		dataIndex : 'menuUrl',
@@ -68,6 +71,7 @@ Ext.define('AM.view.MenuList', {
 		icon : '../js/extJs/icons/table/table_add.png'
 	}, {
 		xtype : 'button',
+		id : 'delMenu',
 		text : '删除',
 		icon : '../js/extJs/icons/table/table_delete.png',
 	}, {

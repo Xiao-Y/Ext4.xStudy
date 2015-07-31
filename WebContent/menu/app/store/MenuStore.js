@@ -1,7 +1,7 @@
 Ext.define('AM.store.MenuStore', {
 	extend : 'Ext.data.Store',
 	model : 'AM.model.MenuModel',
-	pageSize : 10,
+	pageSize : 15,
 	proxy : {
 		url : '../MenuList',
 		type : 'ajax',
