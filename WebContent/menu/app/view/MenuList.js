@@ -38,6 +38,7 @@ Ext.define('AM.view.MenuList', {
 	}, {
 		header : '节点类型',
 		dataIndex : 'menuType',
+		width : 100,
 		renderer : function(value) {
 			if (value == '0') {
 				return '树枝节点';
@@ -45,8 +46,7 @@ Ext.define('AM.view.MenuList', {
 			if (value == '1') {
 				return '叶子节点';
 			}
-		},
-		width : 100
+		}
 	}, {
 		// xtype : 'datecolumn',
 		header : '创建时间',
@@ -73,14 +73,16 @@ Ext.define('AM.view.MenuList', {
 		xtype : 'button',
 		id : 'delMenu',
 		text : '删除',
-		icon : '../js/extJs/icons/table/table_delete.png',
+		icon : '../js/extJs/icons/table/table_delete.png'
 	}, {
 		xtype : 'button',
 		text : '修改',
-		icon : '../js/extJs/icons/table/table_edit.png',
+		id : "editMenu",
+		icon : '../js/extJs/icons/table/table_edit.png'
 	}, {
 		xtype : 'button',
 		text : '高级查询',
+		id : "topQueryMenu",
 		icon : '../js/extJs/icons/used/zoom_in.png'
 	} ],
 	// 一个或者一系列组件作为挂靠组件被添加到panel中

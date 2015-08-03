@@ -264,8 +264,16 @@ public class MenuService {
 	private String whereAppend(MenuModel menuModel) {
 		StringBuffer where = new StringBuffer();
 		if (menuModel != null) {
-			if (!StringUtils.isEmpty(menuModel.getParentId())) {
+			if (!StringUtils.isEmpty(menuModel.getParentId()) && !menuModel.getParentId().equals("0")) {
 				where.append(" and parentId = '" + menuModel.getParentId() +"' ");
+			}
+			
+			if(!StringUtils.isEmpty(menuModel.getMenuName())){
+				where.append(" and menuName like '%" + menuModel.getMenuName() +"%' ");
+			}
+			
+			if(!StringUtils.isEmpty(menuModel.getMenuType()) && !menuModel.getMenuType().equals("-1")){
+				where.append(" and menuType = '" + menuModel.getMenuType() +"' ");
 			}
 		}
 		return where.toString();

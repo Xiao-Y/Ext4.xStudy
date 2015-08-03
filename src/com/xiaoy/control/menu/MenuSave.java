@@ -42,7 +42,8 @@ public class MenuSave extends HttpServlet {
 		String seq = (String) menuModelJson.get("seq");
 		String menuType = (String) menuModelJson.get("menuType");
 		String parentId = (String) menuModelJson.get("parentId");
-		if("0".equals(menuType)){
+		// 当节点类型选择0即树枝节点，parentId设置为-1为树枝节点类型
+		if ("0".equals(menuType)) {
 			parentId = "-1";
 		}
 		String remark = (String) menuModelJson.get("remark");

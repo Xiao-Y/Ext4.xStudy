@@ -1,13 +1,13 @@
-Ext.define('AM.view.MenuAdd', {
+Ext.define('AM.view.MenuQuery', {
 	extend : 'Ext.form.Panel',
-	alias : "widget.menuAdd",
+	alias : "widget.menuQuery",
 	buttonAlign : 'right',
 	bodyPadding : 15,
 	autoScroll : true,
 	layout : 'anchor',
 	defaults : {
 		xtype : 'textfield',
-		labelWidth : 130,
+		labelWidth : 90,
 		labelAlign : 'right',
 		anchor : '90%'
 	},
@@ -15,13 +15,7 @@ Ext.define('AM.view.MenuAdd', {
 	items : [ {
 		fieldLabel : '菜单名称',
 		xtype : 'textfield',
-		name : 'menuName',
-		allowBlank : false
-	}, {
-		fieldLabel : '请求路径',
-		xtype : 'textfield',
-		name : 'menuUrl',
-		allowBlank : false
+		name : 'menuName'
 	}, {
 		xtype : 'radiogroup',
 		fieldLabel : '节点类型',
@@ -32,28 +26,32 @@ Ext.define('AM.view.MenuAdd', {
 		},
 		layout : 'hbox',
 		items : [ {
+			boxLabel : '无',
+			name : 'menuType',
+			inputValue : '-1',
+			checked : true
+		}, {
 			boxLabel : '树枝节点',
 			name : 'menuType',
 			inputValue : '0'
 		}, {
 			boxLabel : '叶子节点',
 			name : 'menuType',
-			inputValue : '1',
-			checked : true
+			inputValue : '1'
 		} ],
 		listeners : {
 			"change" : function() {
-				if (Ext.getCmp("menuType").getValue().menuType == "0") {
-					Ext.getCmp("parentId").hide();
-				} else {
+				if (Ext.getCmp("menuType").getValue().menuType == "1") {
 					Ext.getCmp("parentId").show();
+				} else {
+					Ext.getCmp("parentId").hide();
 				}
 			}
 		}
 	}, {
 		fieldLabel : '上级菜单',
 		xtype : 'combobox',
-		// hidden : true,// 隐藏
+		hidden : true,// 隐藏
 		displayField : 'menuName',
 		valueField : 'id',
 		value : '0',
@@ -61,30 +59,15 @@ Ext.define('AM.view.MenuAdd', {
 		store : 'ParentMenuStore',
 		name : 'parentId',
 		id : 'parentId'
-	}, {
-		fieldLabel : '排序号',
-		name : 'seq',
-		maxLength : 4,
-		xtype : 'numberfield',// 数值类型
-		allowDecimals : false,// 是否允许小数
-		// decimalPrecision: 2, // 小数位精度
-		allowNegative : false, // 是否允许负数
-		allowBlank : true,// 是否允许为空
-		minValue : 0,
-		maxValue : 9999
-	}, {
-		fieldLabel : '备注',
-		xtype : 'textfield',
-		name : 'remark'
 	} ],
 	dockedItems : [ {
 		xtype : 'toolbar',
 		dock : 'bottom',
 		items : [ '->', {
 			xtype : 'button',
-			text : '保存',
-			id : 'saveMenu',
-			icon : '../js/extJs/icons/table/table_save.png'
+			text : '查询',
+			id : 'queryMenu',
+			icon : '../js/extJs/icons/used/zoom_in.png'
 		}, {
 			xtype : 'button',
 			text : '重置',

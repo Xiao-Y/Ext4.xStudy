@@ -1,6 +1,6 @@
 Ext.define('AM.controller.MenuController', {
 	extend : 'Ext.app.Controller',
-	views : [ 'MenuList', 'MenuAdd' ],
+	views : [ 'MenuList', 'MenuAdd', 'MenuQuery' ],
 	stores : [ 'MenuStore', 'ParentMenuStore' ],
 	models : [ 'MenuModel' ],
 	init : function() {
@@ -14,7 +14,22 @@ Ext.define('AM.controller.MenuController', {
 						width : 420,
 						layout : 'fit',
 						items : [ {
-							xtype : 'menuAdd',// 使用的别名
+							xtype : 'menuAdd'// 使用的别名
+						} ]
+					}).show();
+				}
+			},
+			// 高级查询
+			'menuList button[id=topQueryMenu]' : {
+				click : function() {
+					Ext.create('Ext.window.Window', {
+						title : '高级查询',
+						id : 'menuQueryWin',
+						height : 300,
+						width : 420,
+						layout : 'fit',
+						items : [ {
+							xtype : 'menuQuery'// 使用的别名
 						} ]
 					}).show();
 				}
@@ -22,6 +37,10 @@ Ext.define('AM.controller.MenuController', {
 			// 删除
 			'menuList button[id=delMenu]' : {
 				click : this.delMenu
+			},
+			// 编辑
+			'menuList button[id=editMenu]' : {
+				click : this.editMenu
 			},
 			// 取消
 			'menuAdd button[id=cancelMenu]' : {
@@ -33,8 +52,23 @@ Ext.define('AM.controller.MenuController', {
 			'menuAdd button[id=saveMenu]' : {
 				click : this.saveMenu
 			},
+			// 查询操作
+			'menuQuery button[id=queryMenu]' : {
+				click : this.queryMenu
+			},
+			// 重置
 			'menuAdd button[id=resetMenu]' : {
 				click : this.resetMenu
+			},
+			// 重置
+			'menuQuery button[id=resetMenu]' : {
+				click : this.resetMenu
+			},
+			// 取消
+			'menuQuery button[id=cancelMenu]' : {
+				click : function() {
+					Ext.getCmp('menuQueryWin').destroy();
+				}
 			}
 		});
 	},
@@ -79,6 +113,15 @@ Ext.define('AM.controller.MenuController', {
 			});
 		}
 	},
+	queryMenu : function(btn) {
+		var form = btn.up('form').getForm();
+		var fv = form.getValues();
+		Ext.getCmp('menuQueryWin').destroy();
+		var gridPanel = Ext.getCmp("menuList");
+		var store = gridPanel.getStore();
+		store.proxy.extraParams = fv;
+		store.reload();
+	},
 	// 重置
 	resetMenu : function(btn) {
 		var saveFormPanel = btn.up('form');
@@ -114,5 +157,26 @@ Ext.define('AM.controller.MenuController', {
 				});
 			}
 		});
+	},
+	// 编辑
+	editMenu : function() {
+		var sm = Ext.getCmp('menuList').getSelectionModel();
+		if (!sm.hasSelection()) {
+			Ext.Msg.alert('提示', '请选择要删除的行');
+			return;
+		}
+		var selectId = sm.getLastSelected();
+		// var data = selectId.data;
+		var id = selectId.internalId;
+		Ext.create('Ext.window.Window', {
+			title : '编辑菜单',
+			id : 'menuEditWin',
+			height : 300,
+			width : 420,
+			layout : 'fit',
+			items : [ {
+				xtype : 'menuAdd'// 使用的别名
+			} ]
+		}).show();
 	}
 });
