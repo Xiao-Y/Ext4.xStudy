@@ -40,30 +40,44 @@ Ext.define('AM.controller.MenuController', {
 	},
 	// 保存菜单
 	saveMenu : function(btn) {
-		var saveFormPanel = btn.up('form');
-		var fv = saveFormPanel.getValues();
-		Ext.Ajax.request({
-			url : '../MenuSave',
-			params : Ext.JSON.encode(fv),
-			method : 'POST',
-			async : false,
-			submitEmptyText : false,
-			headers : {
-				"Content-Type" : "application/json; charset=utf-8"
-			},
-			success : function(response) {
-				var jsonObj = Ext.JSON.decode(response.responseText);
-				if (jsonObj.flag) {
-					Ext.getCmp('menuAddWin').destroy();
-					Ext.Msg.alert('提示', '保存成功');
-				} else {
-					Ext.Msg.alert('提示', '保存失败');
+		// -------
+		// var saveFormPanel = btn.up('form');
+		// var fv = saveFormPanel.getValues();
+		// ------两种方式相同
+		// var form = btn.up('form').getForm();
+		// var fv = form.getValues();
+		// -------
+
+		var form = btn.up('form').getForm();
+		if (form.isValid()) {
+			var fv = form.getValues();
+			Ext.Ajax.request({
+				url : '../MenuSave',
+				params : Ext.JSON.encode(fv),
+				method : 'POST',
+				async : false,
+				submitEmptyText : false,
+				headers : {
+					"Content-Type" : "application/json; charset=utf-8"
+				},
+				success : function(response) {
+					var jsonObj = Ext.JSON.decode(response.responseText);
+					if (jsonObj.flag) {
+						Ext.getCmp('menuAddWin').destroy();
+						Ext.Msg.alert('提示', '保存成功');
+						var gridPanel = Ext.getCmp("menuList");
+						var store = gridPanel.getStore();
+						store.reload();
+						// Ext.getCmp('menuList').getStore().reload(); // 刷新表格
+					} else {
+						Ext.Msg.alert('提示', '保存失败');
+					}
+				},
+				failure : function(response) {
+					Ext.Msg.alert('提示', '操作失败');
 				}
-			},
-			failure : function(response) {
-				Ext.Msg.alert('提示', '操作失败');
-			}
-		});
+			});
+		}
 	},
 	// 重置
 	resetMenu : function(btn) {
