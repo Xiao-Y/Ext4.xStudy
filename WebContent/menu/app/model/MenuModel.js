@@ -2,31 +2,28 @@ Ext.define('AM.model.MenuModel', {
 	extend : 'Ext.data.Model',
 	fields : [ {
 		name : 'id',
-		type : 'string',
-		sortable : true
+		type : 'string'
 	}, {
 		name : 'menuName',
 		type : 'string',
 		sortable : true
 	}, {
 		name : 'menuUrl',
-		type : 'string',
-		sortable : true
+		type : 'string'
 	}, {
 		name : 'parentId',
 		type : 'string',
 		sortable : true
 	}, {
 		name : 'menuType',
-		type : 'int'
+		type : 'string'
 	}, {
 		name : 'seq',
-		type : 'string',
+		type : 'int',
 		sortable : true
 	}, {
 		name : 'remark',
-		type : 'string',
-		sortable : true
+		type : 'string'
 	}, {
 		name : 'createTime',
 		type : 'string',

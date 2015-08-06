@@ -2,8 +2,8 @@ Ext.define('AM.view.MenuQuery', {
 	extend : 'Ext.window.Window',
 	alias : "widget.menuQuery",
 	id : 'menuQueryWindow',
-	height : 500,
-	width : 600,
+	height : 300,
+	width : 400,
 	layout : 'fit',
 	items : [ {
 		xtype : 'form',
@@ -66,6 +66,18 @@ Ext.define('AM.view.MenuQuery', {
 			store : 'ParentMenuStore',
 			name : 'parentId',
 			id : 'parentId'
+		},{
+			fieldLabel : '创建时间',
+			xtype : 'datefield',
+			format : 'Y-m-d',
+			invalidText : "{0}不是一个正确的日期格式，如2015-08-06",
+			name : 'createTime'
+		},{
+			fieldLabel : '更新时间',
+			xtype : 'datefield',
+			format : 'Y-m-d',
+			invalidText : "{0}不是一个正确的日期格式，如2015-08-06",
+			name : 'updateTime'
 		} ]
 	} ],
 	dockedItems : [ {

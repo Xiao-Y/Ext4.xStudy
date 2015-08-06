@@ -2,8 +2,8 @@ Ext.define('AM.view.MenuAdd', {
 	extend : 'Ext.window.Window',
 	alias : "widget.menuAdd",
 	id : 'menuAddWindow',
-	height : 500,
-	width : 600,
+	height : 300,
+	width : 400,
 	layout : 'fit',
 	items : [ {
 		xtype : 'form',
@@ -30,30 +30,40 @@ Ext.define('AM.view.MenuAdd', {
 		}, {
 			fieldLabel : '请求路径',
 			xtype : 'textfield',
-			name : 'menuUrl',
-			allowBlank : false
+			name : 'menuUrl'
 		}, {
-			xtype : 'radiogroup',
+//			xtype : 'radiogroup',
+//			fieldLabel : '节点类型',
+//			id : 'menuType',
+//			name : 'menuType',
+//			defaults : {
+//				flex : 1
+//			},
+//			layout : 'hbox',
+//			items : [ {
+//				boxLabel : '树枝节点',
+//				name : 'menuType',
+//				inputValue : '0'
+//			}, {
+//				boxLabel : '叶子节点',
+//				name : 'menuType',
+//				inputValue : '1',
+//				checked : true
+//			} ],
 			fieldLabel : '节点类型',
+			xtype : 'combobox',
+			// hidden : true,// 隐藏
+			displayField : 'menuTypeName',
+			valueField : 'menuType',
 			id : 'menuType',
+			queryMode : 'local',
+			store : 'MenuTypeStore',
 			name : 'menuType',
-			defaults : {
-				flex : 1
-			},
-			layout : 'hbox',
-			items : [ {
-				boxLabel : '树枝节点',
-				name : 'menuType',
-				inputValue : '0'
-			}, {
-				boxLabel : '叶子节点',
-				name : 'menuType',
-				inputValue : '1',
-				checked : true
-			} ],
+			forceSelection : true,// 所选择的值必须是列表中的值
+			value : '1',
 			listeners : {
 				"change" : function() {
-					if (Ext.getCmp("menuType").getValue().menuType == "0") {
+					if (Ext.getCmp("menuType").getValue() == "0") {
 						Ext.getCmp("parentId").hide();
 					} else {
 						Ext.getCmp("parentId").show();
@@ -68,6 +78,7 @@ Ext.define('AM.view.MenuAdd', {
 			valueField : 'id',
 			value : '0',
 			queryMode : 'local',
+			forceSelection : true,// 所选择的值必须是列表中的值
 			store : 'ParentMenuStore',
 			name : 'parentId',
 			id : 'parentId'
@@ -105,7 +116,7 @@ Ext.define('AM.view.MenuAdd', {
 			xtype : 'button',
 			id : 'cancelMenu',
 			text : '关闭',
-			icon : '../js/extJs/icons/used/cancel.png',
+			icon : '../js/extJs/icons/used/cancel.png'
 		} ]
 	} ]
 });

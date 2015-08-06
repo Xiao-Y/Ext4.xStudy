@@ -20,6 +20,11 @@ Ext.onReady(function() {
 		// // } ]
 		//		// });
 		//		},
+//		initComponent : function() {
+//			// 设置图标字体文件，只有设置了以后才能用glyph属性
+//			Ext.setGlyphFontFamily('FontAwesome'); 
+//			this.callParent();
+//		},
 		controllers : [ 'HomeController' ],
 		// 自动加载和实例化Viewport文件
 		autoCreateViewport : true

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -13,10 +14,12 @@ import org.apache.commons.lang.StringUtils;
 import com.xiaoy.model.MenuModel;
 import com.xiaoy.util.MySQLConnection;
 
-public class MenuService {
+public class MenuService
+{
 
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
 	/**
 	 * 根据条件查询
@@ -25,37 +28,46 @@ public class MenuService {
 	 * @param start
 	 * @param menuModel
 	 * @return
-	 *
+	 * 
 	 * @date 2015年7月31日下午5:11:45
 	 */
-	public List<MenuModel> getMenuList(int limit, int start, MenuModel menuModel) {
+	public List<MenuModel> getMenuList(int limit, int start, MenuModel menuModel)
+	{
 		MySQLConnection myConn = new MySQLConnection();
 		List<MenuModel> root = new ArrayList<MenuModel>();
 		String startSql = "select * from menu where 1=1 ";
 		String centerSql = this.whereAppend(menuModel);
-		if (!StringUtils.isEmpty(centerSql)) {
+		if (!StringUtils.isEmpty(centerSql))
+		{
 			startSql = startSql + centerSql;
 		}
 		String endSql = " order by updateTime desc limit " + start + "," + limit;
 		String sql = startSql + endSql;
 		Connection conn = myConn.getMySQLConnection();
-		try {
+		try
+		{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			while (rs.next()) {
+			while (rs.next())
+			{
 				MenuModel u = new MenuModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getTimestamp(6),
 						rs.getTimestamp(7), rs.getString(8), rs.getInt(9));
 				root.add(u);
 			}
 			rs.close();
 			ps.close();
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
-		} finally {
-			if (conn != null) {
-				try {
+		} finally
+		{
+			if (conn != null)
+			{
+				try
+				{
 					conn.close();
-				} catch (SQLException e) {
+				} catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -67,67 +79,83 @@ public class MenuService {
 	 * 查询出所有的子菜单
 	 * 
 	 * @return
-	 *
+	 * 
 	 * @date 2015年7月31日下午5:11:45
 	 */
-	public List<MenuModel> getChildMenuList() {
+	public List<MenuModel> getChildMenuList()
+	{
 		MySQLConnection myConn = new MySQLConnection();
 		List<MenuModel> root = new ArrayList<MenuModel>();
 		String sql = "select * from menu where 1=1 and parentId <> -1 ";
 		Connection conn = myConn.getMySQLConnection();
-		try {
+		try
+		{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			while (rs.next()) {
+			while (rs.next())
+			{
 				MenuModel u = new MenuModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getTimestamp(6),
 						rs.getTimestamp(7), rs.getString(8), rs.getInt(9));
 				root.add(u);
 			}
 			rs.close();
 			ps.close();
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
-		} finally {
-			if (conn != null) {
-				try {
+		} finally
+		{
+			if (conn != null)
+			{
+				try
+				{
 					conn.close();
-				} catch (SQLException e) {
+				} catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 			}
 		}
 		return root;
 	}
-	
+
 	/**
 	 * 查询出所有的父级菜单
 	 * 
 	 * @return
-	 *
+	 * 
 	 * @date 2015年7月31日下午5:11:45
 	 */
-	public List<MenuModel> getParentMenuList() {
+	public List<MenuModel> getParentMenuList()
+	{
 		MySQLConnection myConn = new MySQLConnection();
 		List<MenuModel> root = new ArrayList<MenuModel>();
 		String sql = "select * from menu where 1=1 and parentId = -1";
 		Connection conn = myConn.getMySQLConnection();
-		try {
+		try
+		{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			while (rs.next()) {
+			while (rs.next())
+			{
 				MenuModel u = new MenuModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getTimestamp(6),
 						rs.getTimestamp(7), rs.getString(8), rs.getInt(9));
 				root.add(u);
 			}
 			rs.close();
 			ps.close();
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
-		} finally {
-			if (conn != null) {
-				try {
+		} finally
+		{
+			if (conn != null)
+			{
+				try
+				{
 					conn.close();
-				} catch (SQLException e) {
+				} catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -140,33 +168,42 @@ public class MenuService {
 	 * 
 	 * @param menuModel
 	 * @return
-	 *
+	 * 
 	 * @date 2015年7月31日下午5:11:26
 	 */
-	public int getTotal(MenuModel menuModel) {
+	public int getTotal(MenuModel menuModel)
+	{
 		MySQLConnection myConn = new MySQLConnection();
 		String startSql = "select count(*) from menu where 1=1 ";
 		String centerSql = this.whereAppend(menuModel);
-		if (!StringUtils.isEmpty(centerSql)) {
+		if (!StringUtils.isEmpty(centerSql))
+		{
 			startSql = startSql + centerSql;
 		}
 		Connection conn = myConn.getMySQLConnection();
 		int total = 0;
-		try {
+		try
+		{
 			ps = conn.prepareStatement(startSql);
 			rs = ps.executeQuery();
-			if (rs.next()) {
+			if (rs.next())
+			{
 				total = rs.getInt(1);
 			}
 			rs.close();
 			ps.close();
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
-		} finally {
-			if (conn != null) {
-				try {
+		} finally
+		{
+			if (conn != null)
+			{
+				try
+				{
 					conn.close();
-				} catch (SQLException e) {
+				} catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -179,30 +216,37 @@ public class MenuService {
 	 * 
 	 * @param ids
 	 * @return
-	 *
+	 * 
 	 * @date 2015年7月31日下午5:11:17
 	 */
-	public boolean menuDel(String[] ids) {
+	public boolean menuDel(String[] ids)
+	{
 		MySQLConnection myConn = new MySQLConnection();
 		Connection conn = myConn.getMySQLConnection();
 		String sql = "delete from menu where id = ?";
 		boolean flag = false;
-		try {
+		try
+		{
 			ps = conn.prepareStatement(sql);
-			for (String i : ids) {
+			for (String i : ids)
+			{
 				ps.setString(1, i);
 				ps.addBatch();
 			}
 
 			ps.executeBatch();
 			flag = true;
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			flag = false;
 			e.printStackTrace();
-		} finally {
-			try {
+		} finally
+		{
+			try
+			{
 				conn.close();
-			} catch (SQLException e) {
+			} catch (SQLException e)
+			{
 				e.printStackTrace();
 			}
 		}
@@ -214,30 +258,38 @@ public class MenuService {
 	 * 
 	 * @param id
 	 * @return
-	 *
+	 * 
 	 * @date 2015年7月31日下午5:15:12
 	 */
-	public MenuModel getMenuById(String id) {
+	public MenuModel getMenuById(String id)
+	{
 		MySQLConnection myConn = new MySQLConnection();
 		String sql = "select * from menu where 1=1 and id = '" + id + "' ";
 		MenuModel u = null;
 		Connection conn = myConn.getMySQLConnection();
-		try {
+		try
+		{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			if (rs.next()) {
-				u = new MenuModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getTimestamp(6),
-						rs.getTimestamp(7), rs.getString(8), rs.getInt(9));
+			if (rs.next())
+			{
+				u = new MenuModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getTimestamp(6), rs.getTimestamp(7),
+						rs.getString(8), rs.getInt(9));
 			}
 			rs.close();
 			ps.close();
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
-		} finally {
-			if (conn != null) {
-				try {
+		} finally
+		{
+			if (conn != null)
+			{
+				try
+				{
 					conn.close();
-				} catch (SQLException e) {
+				} catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -249,31 +301,39 @@ public class MenuService {
 	 * 根据id查询出其叶子
 	 * 
 	 * @return
-	 *
+	 * 
 	 * @date 2015年7月31日下午5:17:14
 	 */
-	public List<MenuModel> getListMenuById(String id) {
+	public List<MenuModel> getListMenuById(String id)
+	{
 		MySQLConnection myConn = new MySQLConnection();
 		List<MenuModel> root = new ArrayList<MenuModel>();
 		String sql = "select * from menu where 1=1 and parentId = '" + id + "' ";
 		Connection conn = myConn.getMySQLConnection();
-		try {
+		try
+		{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			while (rs.next()) {
+			while (rs.next())
+			{
 				MenuModel u = new MenuModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getTimestamp(6),
 						rs.getTimestamp(7), rs.getString(8), rs.getInt(9));
 				root.add(u);
 			}
 			rs.close();
 			ps.close();
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
-		} finally {
-			if (conn != null) {
-				try {
+		} finally
+		{
+			if (conn != null)
+			{
+				try
+				{
 					conn.close();
-				} catch (SQLException e) {
+				} catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -286,16 +346,19 @@ public class MenuService {
 	 * 
 	 * @param menuModel
 	 * @return
-	 *
+	 * 
 	 * @date 2015年7月31日下午5:10:45
 	 */
-	public boolean menuSave(MenuModel menuModel) {
+	public boolean menuSave(MenuModel menuModel)
+	{
 		MySQLConnection myConn = new MySQLConnection();
 		Connection conn = myConn.getMySQLConnection();
 		String sql = "";
 		boolean f = false;
-		try {
-			if (StringUtils.isEmpty(menuModel.getId())) {
+		try
+		{
+			if (StringUtils.isEmpty(menuModel.getId()))
+			{
 				sql = "insert into menu values (?,?,?,?,?,?,?,?,?)";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, UUID.randomUUID().toString());
@@ -310,7 +373,8 @@ public class MenuService {
 				ps.setString(8, menuModel.getMenuType());
 				ps.setInt(9, menuModel.getSeq());
 				ps.executeUpdate();
-			} else {
+			} else
+			{
 				sql = "update menu set menuName = ?,menuUrl = ?,parentId = ?,remark = ?,updateTime = ?,menuType = ?,seq = ? where id = ?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, menuModel.getMenuName());
@@ -326,14 +390,19 @@ public class MenuService {
 				ps.executeUpdate();
 			}
 			return true;
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			f = false;
 			e.printStackTrace();
-		} finally {
-			if (conn != null) {
-				try {
+		} finally
+		{
+			if (conn != null)
+			{
+				try
+				{
 					conn.close();
-				} catch (SQLException e) {
+				} catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -346,22 +415,44 @@ public class MenuService {
 	 * 
 	 * @param menuModel
 	 * @return
-	 *
+	 * 
 	 * @date 2015年7月31日下午5:11:01
 	 */
-	private String whereAppend(MenuModel menuModel) {
+	private String whereAppend(MenuModel menuModel)
+	{
 		StringBuffer where = new StringBuffer();
-		if (menuModel != null) {
-			if (!StringUtils.isEmpty(menuModel.getParentId()) && !menuModel.getParentId().equals("0")) {
+		if (menuModel != null)
+		{
+			// 父级id
+			if (!StringUtils.isEmpty(menuModel.getParentId()) && !menuModel.getParentId().equals("0"))
+			{
 				where.append(" and parentId = '" + menuModel.getParentId() + "' ");
 			}
 
-			if (!StringUtils.isEmpty(menuModel.getMenuName())) {
+			// 菜单名
+			if (!StringUtils.isEmpty(menuModel.getMenuName()))
+			{
 				where.append(" and menuName like '%" + menuModel.getMenuName() + "%' ");
 			}
 
-			if (!StringUtils.isEmpty(menuModel.getMenuType()) && !menuModel.getMenuType().equals("-1")) {
+			// 菜单类型
+			if (!StringUtils.isEmpty(menuModel.getMenuType()) && !menuModel.getMenuType().equals("-1"))
+			{
 				where.append(" and menuType = '" + menuModel.getMenuType() + "' ");
+			}
+
+			// 创建时间
+			if (menuModel.getCreateTime() != null)
+			{
+				where.append(" and createTime > timestamp('" + sf.format(menuModel.getCreateTime()) + "', '00 00:00:00') ");
+				where.append(" and createTime < timestamp('" + sf.format(menuModel.getCreateTime()) + "', '01 00:00:00') ");
+			}
+
+			// 更新时间
+			if (menuModel.getUpdateTime() != null)
+			{
+				where.append(" and updateTime > timestamp('" + sf.format(menuModel.getUpdateTime()) + "', '00 00:00:00') ");
+				where.append(" and updateTime < timestamp('" + sf.format(menuModel.getUpdateTime()) + "', '01 00:00:00') ");
 			}
 		}
 		return where.toString();

@@ -2,6 +2,8 @@ package com.xiaoy.control.menu;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +42,7 @@ public class MenuList extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		Writer writer = response.getWriter();
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		int limit = 10;
 		int start = 0;
 
@@ -51,6 +54,8 @@ public class MenuList extends HttpServlet {
 		}
 		String menuName = request.getParameter("menuName");// 菜单名称
 		String menuType = request.getParameter("menuType");// 菜单类型
+		String createTime = request.getParameter("createTime");//创建时间
+		String updateTime = request.getParameter("updateTime");//更新时间
 
 		String parentId = request.getParameter("parentId");
 		// 当节点类型选择无时，parantId要查询全部，所以设置为不添加sql
@@ -63,6 +68,19 @@ public class MenuList extends HttpServlet {
 		menuModel.setParentId(parentId);
 		menuModel.setMenuName(menuName);
 		menuModel.setMenuType(menuType);
+		try
+		{
+			if(!StringUtils.isEmpty(createTime)){
+				menuModel.setCreateTime(sf.parse(createTime));
+			}
+			if(!StringUtils.isEmpty(updateTime)){
+				menuModel.setUpdateTime(sf.parse(updateTime));
+			}
+		} catch (ParseException e)
+		{
+			e.printStackTrace();
+		}
+		
 
 		MenuService menuService = new MenuService();
 		List<MenuModel> list = menuService.getMenuList(limit, start, menuModel);

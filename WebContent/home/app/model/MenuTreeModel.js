@@ -4,7 +4,7 @@ Ext.define('AM.model.MenuTreeModel', {
 		name : 'id',
 		type : 'string'
 	}, {
-		name : 'pid',
+		name : 'parentId',
 		type : 'string'
 	}, {
 		name : 'text',

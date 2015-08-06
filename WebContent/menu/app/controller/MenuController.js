@@ -1,7 +1,7 @@
 Ext.define('AM.controller.MenuController', {
 	extend : 'Ext.app.Controller',
 	views : [ 'MenuList', 'MenuAdd', 'MenuQuery' ],
-	stores : [ 'MenuStore', 'ParentMenuStore' ],
+	stores : [ 'MenuStore', 'ParentMenuStore','MenuTypeStore' ],
 	models : [ 'MenuModel' ],
 	init : function() {
 		this.control({
@@ -68,7 +68,7 @@ Ext.define('AM.controller.MenuController', {
 			// 取消
 			'menuQuery button[id=cancelMenu]' : {
 				click : function() {
-					Ext.getCmp('menuQueryWin').destroy();
+					Ext.getCmp('menuQueryWindow').destroy();
 				}
 			}
 		});
