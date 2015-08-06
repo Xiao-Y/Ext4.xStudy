@@ -64,6 +64,78 @@ public class MenuService {
 	}
 
 	/**
+	 * 查询出所有的子菜单
+	 * 
+	 * @return
+	 *
+	 * @date 2015年7月31日下午5:11:45
+	 */
+	public List<MenuModel> getChildMenuList() {
+		MySQLConnection myConn = new MySQLConnection();
+		List<MenuModel> root = new ArrayList<MenuModel>();
+		String sql = "select * from menu where 1=1 and parentId <> -1 ";
+		Connection conn = myConn.getMySQLConnection();
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				MenuModel u = new MenuModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getTimestamp(6),
+						rs.getTimestamp(7), rs.getString(8), rs.getInt(9));
+				root.add(u);
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return root;
+	}
+	
+	/**
+	 * 查询出所有的父级菜单
+	 * 
+	 * @return
+	 *
+	 * @date 2015年7月31日下午5:11:45
+	 */
+	public List<MenuModel> getParentMenuList() {
+		MySQLConnection myConn = new MySQLConnection();
+		List<MenuModel> root = new ArrayList<MenuModel>();
+		String sql = "select * from menu where 1=1 and parentId = -1";
+		Connection conn = myConn.getMySQLConnection();
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				MenuModel u = new MenuModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getTimestamp(6),
+						rs.getTimestamp(7), rs.getString(8), rs.getInt(9));
+				root.add(u);
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return root;
+	}
+
+	/**
 	 * 获取总记录数
 	 * 
 	 * @param menuModel
