@@ -30,13 +30,12 @@ public class MenuSave extends HttpServlet {
 		this.doPost(request, response);
 	}
 
-	@SuppressWarnings("static-access")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String jsonStr = readJSONString(request);
-		JSONObject jsonObject = new JSONObject();
 
-		JSONObject menuModelJson = jsonObject.fromObject(jsonStr);
+		JSONObject menuModelJson = JSONObject.fromObject(jsonStr);
+		String id = menuModelJson.getString("id");
 		String menuName = (String) menuModelJson.get("menuName");
 		String menuUrl = (String) menuModelJson.get("menuUrl");
 		String seq = (String) menuModelJson.get("seq");
@@ -48,14 +47,14 @@ public class MenuSave extends HttpServlet {
 		}
 		String remark = (String) menuModelJson.get("remark");
 
-		MenuModel menuModel = new MenuModel(menuName, menuUrl, parentId,
+		MenuModel menuModel = new MenuModel(id,menuName, menuUrl, parentId,
 				remark, menuType, Integer.parseInt(seq));
 
 		MenuService menuService = new MenuService();
 		boolean flag = menuService.menuSave(menuModel);
 		Map<String, Object> map = new HashMap<>();
 		map.put("flag", flag);
-		JSONObject json = jsonObject.fromObject(map);
+		JSONObject json = JSONObject.fromObject(map);
 		Writer writer = response.getWriter();
 		writer.write(json.toString());
 		writer.close();

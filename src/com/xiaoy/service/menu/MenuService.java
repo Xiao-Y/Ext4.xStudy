@@ -36,18 +36,15 @@ public class MenuService {
 		if (!StringUtils.isEmpty(centerSql)) {
 			startSql = startSql + centerSql;
 		}
-		String endSql = " order by updateTime desc limit " + start + ","
-				+ limit;
+		String endSql = " order by updateTime desc limit " + start + "," + limit;
 		String sql = startSql + endSql;
 		Connection conn = myConn.getMySQLConnection();
 		try {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				MenuModel u = new MenuModel(rs.getString(1), rs.getString(2),
-						rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getTimestamp(6), rs.getTimestamp(7),
-						rs.getString(8), rs.getInt(9));
+				MenuModel u = new MenuModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getTimestamp(6),
+						rs.getTimestamp(7), rs.getString(8), rs.getInt(9));
 				root.add(u);
 			}
 			rs.close();
@@ -157,10 +154,8 @@ public class MenuService {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				u = new MenuModel(rs.getString(1), rs.getString(2),
-						rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getTimestamp(6), rs.getTimestamp(7),
-						rs.getString(8), rs.getInt(9));
+				u = new MenuModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getTimestamp(6),
+						rs.getTimestamp(7), rs.getString(8), rs.getInt(9));
 			}
 			rs.close();
 			ps.close();
@@ -194,10 +189,8 @@ public class MenuService {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				MenuModel u = new MenuModel(rs.getString(1), rs.getString(2),
-						rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getTimestamp(6), rs.getTimestamp(7),
-						rs.getString(8), rs.getInt(9));
+				MenuModel u = new MenuModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getTimestamp(6),
+						rs.getTimestamp(7), rs.getString(8), rs.getInt(9));
 				root.add(u);
 			}
 			rs.close();
@@ -227,28 +220,51 @@ public class MenuService {
 	public boolean menuSave(MenuModel menuModel) {
 		MySQLConnection myConn = new MySQLConnection();
 		Connection conn = myConn.getMySQLConnection();
-		String sql = "insert into menu values (?,?,?,?,?,?,?,?,?)";
+		String sql = "";
 		boolean f = false;
 		try {
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, UUID.randomUUID().toString());
-			ps.setString(2, menuModel.getMenuName());
-			ps.setString(3, menuModel.getMenuUrl());
-			String parentId = StringUtils.isEmpty(menuModel.getParentId()) ? "-1"
-					: menuModel.getParentId();
-			ps.setString(4, parentId);
-			ps.setString(5, menuModel.getRemark());
-			java.sql.Timestamp ti = new java.sql.Timestamp(
-					new java.util.Date().getTime());
-			ps.setTimestamp(6, ti);
-			ps.setTimestamp(7, ti);
-			ps.setString(8, menuModel.getMenuType());
-			ps.setInt(9, menuModel.getSeq());
-			ps.executeUpdate();
+			if (StringUtils.isEmpty(menuModel.getId())) {
+				sql = "insert into menu values (?,?,?,?,?,?,?,?,?)";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, UUID.randomUUID().toString());
+				ps.setString(2, menuModel.getMenuName());
+				ps.setString(3, menuModel.getMenuUrl());
+				String parentId = StringUtils.isEmpty(menuModel.getParentId()) ? "-1" : menuModel.getParentId();
+				ps.setString(4, parentId);
+				ps.setString(5, menuModel.getRemark());
+				java.sql.Timestamp ti = new java.sql.Timestamp(new java.util.Date().getTime());
+				ps.setTimestamp(6, ti);
+				ps.setTimestamp(7, ti);
+				ps.setString(8, menuModel.getMenuType());
+				ps.setInt(9, menuModel.getSeq());
+				ps.executeUpdate();
+			} else {
+				sql = "update menu set menuName = ?,menuUrl = ?,parentId = ?,remark = ?,updateTime = ?,menuType = ?,seq = ? where id = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, menuModel.getMenuName());
+				ps.setString(2, menuModel.getMenuUrl());
+				String parentId = StringUtils.isEmpty(menuModel.getParentId()) ? "-1" : menuModel.getParentId();
+				ps.setString(3, parentId);
+				ps.setString(4, menuModel.getRemark());
+				java.sql.Timestamp ti = new java.sql.Timestamp(new java.util.Date().getTime());
+				ps.setTimestamp(5, ti);
+				ps.setString(6, menuModel.getMenuType());
+				ps.setInt(7, menuModel.getSeq());
+				ps.setString(8, menuModel.getId());
+				ps.executeUpdate();
+			}
 			return true;
 		} catch (SQLException e) {
 			f = false;
 			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		return f;
 	}
@@ -265,15 +281,15 @@ public class MenuService {
 		StringBuffer where = new StringBuffer();
 		if (menuModel != null) {
 			if (!StringUtils.isEmpty(menuModel.getParentId()) && !menuModel.getParentId().equals("0")) {
-				where.append(" and parentId = '" + menuModel.getParentId() +"' ");
+				where.append(" and parentId = '" + menuModel.getParentId() + "' ");
 			}
-			
-			if(!StringUtils.isEmpty(menuModel.getMenuName())){
-				where.append(" and menuName like '%" + menuModel.getMenuName() +"%' ");
+
+			if (!StringUtils.isEmpty(menuModel.getMenuName())) {
+				where.append(" and menuName like '%" + menuModel.getMenuName() + "%' ");
 			}
-			
-			if(!StringUtils.isEmpty(menuModel.getMenuType()) && !menuModel.getMenuType().equals("-1")){
-				where.append(" and menuType = '" + menuModel.getMenuType() +"' ");
+
+			if (!StringUtils.isEmpty(menuModel.getMenuType()) && !menuModel.getMenuType().equals("-1")) {
+				where.append(" and menuType = '" + menuModel.getMenuType() + "' ");
 			}
 		}
 		return where.toString();

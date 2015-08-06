@@ -13,9 +13,10 @@ public class MenuModel {
 	private String menuType;
 	private int seq;
 	
-	public MenuModel(String menuName, String menuUrl, String parentId,
+	public MenuModel(String id, String menuName, String menuUrl, String parentId,
 			String remark, String menuType, int seq) {
 		super();
+		this.id = id;
 		this.menuName = menuName;
 		this.menuUrl = menuUrl;
 		this.parentId = parentId;
