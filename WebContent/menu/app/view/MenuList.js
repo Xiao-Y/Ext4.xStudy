@@ -2,21 +2,21 @@ Ext.define('AM.view.MenuList', {
 	extend : 'Ext.grid.Panel',
 	alias : 'widget.menuList',
 	title : '菜单列表',// 标题
-	width : 1200,
-	height : 500,
+//	width : 1200,
+//	height : 500,
 	id : 'menuList',
-	renderTo : 'GridDemo',
+	region: 'center',
 	// layout : 'border',
 	// frame : true,// 面板渲染
 	store : 'MenuStore',// 加载数据
 	selType : 'checkboxmodel',// 复选框选择模式
 	// multiSelect : true,// 允许多选
 	columns : [ 
-	// {
-	// xtype : 'rownumberer',
-	// header : '序号',
-	// width : 50
-	//	}, 
+	 {
+		xtype : 'rownumberer',
+		header : '序号',
+		width : 50
+	}, 
 	{
 		header : 'ID',
 		dataIndex : 'id',

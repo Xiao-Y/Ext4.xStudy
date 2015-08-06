@@ -11,7 +11,7 @@ Ext.onReady(function() {
 		appFolder : 'app',// 应用的目录
 		launch : function() {// 当前页面加载完成执行的函数
 			Ext.create('Ext.container.Viewport', {
-				layout : 'auto',// 自动布局
+				layout : 'border',// 自动布局
 				items : [ {
 					xtype : 'menuList',//使用的别名
 					title : '菜单列表',
