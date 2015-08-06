@@ -4,7 +4,6 @@ Ext.define('AM.store.MenuTreeStore', {
 	model : 'AM.model.MenuTreeModel',
 	defaultRoodId : 'root',
 	proxy : {
-//		url : 'data.json',
 		url : '../BuildTree',
 		type : 'ajax',
 		reader : {
