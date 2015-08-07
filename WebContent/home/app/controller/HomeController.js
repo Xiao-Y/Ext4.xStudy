@@ -3,7 +3,7 @@ Ext.define('AM.controller.HomeController', {
 	// 将Viewport.js添加到控制器
 	views : ['Viewport', 'MenuTreeView', 'ContextMenu'],
 	stores : ['MenuTreeStore'],
-	model : ['MenuTreeModel'],
+	models : ['MenuTreeModel'],//写成了model,导致后面的url没有获取 
 	// 通过init函数来监听视图事件，控制视图与控制器的交互
 	init : function() {
 		// init函数通过this.control来负责监听

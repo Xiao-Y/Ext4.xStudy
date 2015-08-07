@@ -56,6 +56,7 @@ public class BuildTree extends HttpServlet
 		for (MenuModel parent : parentMenu)
 		{
 			Map<String, Object> map = new HashMap<>();
+			map.put("id", parent.getId());
 			map.put("expandabl", false);// 菜单折叠状态
 			map.put("text", parent.getMenuName());// 菜单名称
 			map.put("index", parent.getSeq());
@@ -66,10 +67,11 @@ public class BuildTree extends HttpServlet
 				if (parent.getId().equals(child.getParentId()))
 				{
 					Map<String, Object> childMap = new HashMap<>();
+					childMap.put("id", child.getId());
 					childMap.put("text", child.getMenuName());// 菜单名称
 					childMap.put("index", child.getSeq());
 					childMap.put("parentId", child.getParentId());
-					childMap.put("url", child.getMenuUrl());
+					childMap.put("url", "../" + child.getMenuUrl());
 					childMap.put("leaf", true);
 					list.add(childMap);
 				}

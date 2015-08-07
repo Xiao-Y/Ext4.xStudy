@@ -21,9 +21,15 @@ Ext.define('AM.view.Viewport',{
 	}, {
 		id : 'mainContent',
 		title : '主题内容显示',
-		layout : 'fit',
+		//layout : 'fit',
 		region : 'center',
 		collapisble : true,
 		contentEl : 'contentIframe'
-	} ]
+	},{
+        xtype:'toolbar',
+        region:'south',
+        ui: 'footer',
+        margin: '7 0 0 0',
+        items: ['就绪', '->', '&copy; 2015 By XiaoY制作']
+    } ]
 });
