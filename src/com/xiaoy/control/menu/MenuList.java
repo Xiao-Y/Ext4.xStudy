@@ -37,7 +37,6 @@ public class MenuList extends HttpServlet {
 		this.doPost(request, response);
 	}
 
-	@SuppressWarnings("static-access")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -84,6 +83,12 @@ public class MenuList extends HttpServlet {
 
 		MenuService menuService = new MenuService();
 		List<MenuModel> list = menuService.getMenuList(limit, start, menuModel);
+		for(MenuModel m : list){
+			MenuModel parentMenu = menuService.getMenuById(m.getParentId());
+			if(parentMenu != null){
+				m.setParentName(parentMenu.getMenuName());
+			}
+		}
 
 		int total = menuService.getTotal(menuModel);
 
@@ -95,8 +100,7 @@ public class MenuList extends HttpServlet {
 		jsonConfig.registerJsonValueProcessor(Date.class,
 				new JsonDateValueProcessor());
 
-		JSONObject json = new JSONObject();
-		JSONObject jsonObject = json.fromObject(rootMap, jsonConfig);
+		JSONObject jsonObject = JSONObject.fromObject(rootMap, jsonConfig);
 		writer.write(jsonObject.toString());
 		writer.close();
 	}

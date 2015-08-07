@@ -7,6 +7,7 @@ public class MenuModel {
 	private String menuName;
 	private String menuUrl;
 	private String parentId;
+	private String parentName;
 	private String remark;
 	private Date createTime;
 	private Date updateTime;
@@ -94,5 +95,13 @@ public class MenuModel {
 	}
 	public void setSeq(int seq) {
 		this.seq = seq;
+	}
+	public String getParentName()
+	{
+		return parentName;
+	}
+	public void setParentName(String parentName)
+	{
+		this.parentName = parentName;
 	}
 }

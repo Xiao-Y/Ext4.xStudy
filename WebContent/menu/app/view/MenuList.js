@@ -47,13 +47,14 @@ Ext.define('AM.view.MenuList', {
 		}, 
 		{
 			header : 'ID',
+			hidden : true,
 			dataIndex : 'id',
-			width : 200
+			width : 120
 		}, {
 			header : '菜单名称',
 			dataIndex : 'menuName',
 			//locked : true,	//锁定
-			width : 150
+			width : 130
 		}, {
 			header : '请求路径',
 			dataIndex : 'menuUrl',
@@ -61,11 +62,16 @@ Ext.define('AM.view.MenuList', {
 		}, {
 			header : '父级ID',
 			dataIndex : 'parentId',
+//			hidden : true,
+			width : 120
+		}, {
+			header : '父级菜单名称',
+			dataIndex : 'parentName',
 			width : 120
 		}, {
 			header : '节点类型',
 			dataIndex : 'menuType',
-			width : 100,
+			width : 80,
 			renderer : function(value) {
 				if (value == '0') {
 					return '树枝节点';
@@ -78,12 +84,12 @@ Ext.define('AM.view.MenuList', {
 			header : '创建时间',
 			format : 'Y-m-d H:i:s',// 格式化
 			dataIndex : 'createTime',
-			width : 180
+			width : 135
 		}, {
 			header : '更新时间',
 			dataIndex : 'updateTime',
 			format : 'Y-m-d H:i:s',// 格式化
-			width : 180
+			width : 135
 		}, {
 			header : '备注',
 			dataIndex : 'remark',
@@ -102,7 +108,7 @@ Ext.define('AM.view.MenuList', {
 		region: 'south',
 		xtype: 'panel',
 		split:true,
-		height:255,
+		height:150,
 		layout:'fit',
 		items: [{
             xtype: 'textareafield',

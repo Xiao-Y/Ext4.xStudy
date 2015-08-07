@@ -13,6 +13,8 @@ Ext.define('AM.controller.MenuController', {
 							Ext.create('AM.view.MenuAdd', {});// 第一次创建添加显示窗口
 							console.log('创建窗口');
 						}
+						//当点击添加时加载
+						Ext.getCmp("parentId").getStore().reload();
 						baseFormWindow = Ext.getCmp("menuAddWindow");
 						baseFormWindow.show();
 					});
@@ -27,6 +29,8 @@ Ext.define('AM.controller.MenuController', {
 							Ext.create('AM.view.MenuQuery', {});// 第一次创建添加显示窗口
 							console.log('创建窗口');
 						}
+						//当点击查询时加载
+						Ext.getCmp("parentId").getStore().reload();
 						baseFormWindow = Ext.getCmp("menuQueryWindow");
 						baseFormWindow.show();
 					});

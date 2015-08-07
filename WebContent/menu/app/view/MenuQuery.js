@@ -65,6 +65,11 @@ Ext.define('AM.view.MenuQuery', {
 			queryMode : 'local',
 			store : 'ParentMenuStore',
 			name : 'parentId',
+			listConfig : {// 下拉列表的样式
+				emptyText : "<font color='red'>没有找到匹配项</font>",
+				maxHeight : 100
+			// 最大宽度
+			},
 			id : 'parentId'
 		},{
 			fieldLabel : '创建时间',

@@ -15,6 +15,10 @@ Ext.define('AM.model.MenuModel', {
 		type : 'string',
 		sortable : true
 	}, {
+		name : 'parentName',
+		type : 'string',
+		sortable : true
+	}, {
 		name : 'menuType',
 		type : 'string'
 	}, {

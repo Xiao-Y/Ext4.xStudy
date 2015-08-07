@@ -32,24 +32,6 @@ Ext.define('AM.view.MenuAdd', {
 			xtype : 'textfield',
 			name : 'menuUrl'
 		}, {
-//			xtype : 'radiogroup',
-//			fieldLabel : '节点类型',
-//			id : 'menuType',
-//			name : 'menuType',
-//			defaults : {
-//				flex : 1
-//			},
-//			layout : 'hbox',
-//			items : [ {
-//				boxLabel : '树枝节点',
-//				name : 'menuType',
-//				inputValue : '0'
-//			}, {
-//				boxLabel : '叶子节点',
-//				name : 'menuType',
-//				inputValue : '1',
-//				checked : true
-//			} ],
 			fieldLabel : '节点类型',
 			xtype : 'combobox',
 			// hidden : true,// 隐藏
@@ -75,12 +57,18 @@ Ext.define('AM.view.MenuAdd', {
 			xtype : 'combobox',
 			// hidden : true,// 隐藏
 			displayField : 'menuName',
+			allowBlank : false,
 			valueField : 'id',
 			value : '0',
 			queryMode : 'local',
-			forceSelection : true,// 所选择的值必须是列表中的值
+			//forceSelection : true,// 所选择的值必须是列表中的值
 			store : 'ParentMenuStore',
 			name : 'parentId',
+			listConfig : {// 下拉列表的样式
+				emptyText : "<font color='red'>没有找到匹配项</font>",
+				maxHeight : 100
+			// 最大宽度
+			},
 			id : 'parentId'
 		}, {
 			fieldLabel : '排序号',
