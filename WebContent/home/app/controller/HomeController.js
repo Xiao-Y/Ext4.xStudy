@@ -21,12 +21,29 @@ Ext.define('AM.controller.HomeController', {
 	changePage : function(view, rec, item, index, e) {
 		// 获取url地址
 		var url = rec.get('url');
+		if(''==url||null==url||'../'==url){
+			return false;
+		}
 		// 获取当前节点信息
 		var title = rec.get('text');
 		// 将主体内容部分的url地址指定为我们获取到的url
-		Ext.getDom('contentIframe').src = url;
-		// 将主体内容框的标题设置为我们获取的节点信息
-		Ext.getCmp('mainContent').setTitle(title);
+//		Ext.getDom('contentIframe').src = url;
+//		// 将主体内容框的标题设置为我们获取的节点信息
+//		Ext.getCmp('mainContent').setTitle(title);
+		var id = rec.get('id');
+		var mainPanel = Ext.getCmp('mainContent');
+		if (!mainPanel.child('#' + id)) {
+			var tab = Ext.create('AM.view.ContentPanel', {
+				itemId : id,
+				url : url,
+				title : title,
+				closable : true,
+				glyph:0xf123
+			});
+			mainPanel.add(tab).show().doLayout();
+		} else {
+			mainPanel.setActiveTab(id);
+		}
 	},
 	contextMenu : function(tree, record, item, index, e, eOpts){
 		 //阻止浏览器默认右键事件

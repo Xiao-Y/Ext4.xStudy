@@ -3,6 +3,12 @@ Ext.define('AM.view.Viewport',{
 	alias : 'widget.homeViewport',
 	// 布局方式：border
 	layout : 'border',
+//	initComponent : function() {
+//					var me = this;
+//		me.callParent(arguments);	
+////					Ext.getCmp('cmpUserName').setValue(Ext.get('user_name').getValue());
+//					
+//					},
 	items : [{
 		title : 'ExtJS案例',
 		collapisble : true,
@@ -15,16 +21,19 @@ Ext.define('AM.view.Viewport',{
 		width : 180,
 		split : true,
 		collapisble : true,
+		xtype : 'panel',//为了显示滑动条
+		autoScroll:true,
 		items:[{
 			xtype : 'menutree'
 		}]
 	}, {
 		id : 'mainContent',
-		title : '主题内容显示',
-		//layout : 'fit',
+		//title : '主题内容显示',
+		xtype:'tabpanel',
 		region : 'center',
-		collapisble : true,
-		contentEl : 'contentIframe'
+		collapisble : true
+//		,
+//		contentEl : 'contentIframe'
 	},{
         xtype:'toolbar',
         region:'south',
