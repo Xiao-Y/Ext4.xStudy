@@ -49,19 +49,20 @@ Ext.define('AM.view.MenuQuery', {
 			listeners : {
 				"change" : function() {
 					if (Ext.getCmp("menuType").getValue().menuType == "1") {
-						Ext.getCmp("parentId").show();
+						Ext.getCmp("parentId").setDisabled(false);
 					} else {
-						Ext.getCmp("parentId").hide();
+						Ext.getCmp("parentId").setDisabled(true);
 					}
 				}
 			}
 		}, {
 			fieldLabel : '上级菜单',
 			xtype : 'combobox',
-			hidden : true,// 隐藏
+			//hidden : true,// 隐藏
+			disabled : true,
 			displayField : 'menuName',
 			valueField : 'id',
-			value : '0',
+			//value : '-1',
 			queryMode : 'local',
 			store : 'ParentMenuStore',
 			name : 'parentId',

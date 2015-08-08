@@ -60,6 +60,10 @@ Ext.define('AM.view.MenuList', {
 			dataIndex : 'menuUrl',
 			width : 150
 		}, {
+			header : '所在位置',
+			dataIndex : 'seq',
+			width : 80
+		}, {
 			header : '父级ID',
 			dataIndex : 'parentId',
 //			hidden : true,

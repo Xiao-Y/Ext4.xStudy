@@ -11,7 +11,7 @@
 <!-- 引入国际化文件 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/extJs/ext-lang-zh_CN.js"></script>
 
-<script type="text/javascript" src="${pageContext.request.contextPath }/base/001_holleWorld.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/000base/001_holleWorld.js"></script>
 
 <title>Insert title here</title>
 </head>

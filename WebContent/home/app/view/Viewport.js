@@ -18,7 +18,7 @@ Ext.define('AM.view.Viewport',{
 	}, {
 		title : '功能菜单',
 		region : 'west',
-		width : 180,
+		width : 200,
 		split : true,
 		collapisble : true,
 		xtype : 'panel',//为了显示滑动条

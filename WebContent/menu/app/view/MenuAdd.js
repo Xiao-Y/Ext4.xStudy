@@ -46,22 +46,22 @@ Ext.define('AM.view.MenuAdd', {
 			listeners : {
 				"change" : function() {
 					if (Ext.getCmp("menuType").getValue() == "0") {
-						Ext.getCmp("parentId").hide();
+						Ext.getCmp("parentId").setDisabled(true);
 					} else {
-						Ext.getCmp("parentId").show();
+						Ext.getCmp("parentId").setDisabled(false);
 					}
 				}
 			}
 		}, {
 			fieldLabel : '上级菜单',
 			xtype : 'combobox',
-			// hidden : true,// 隐藏
+			 //hidden : true,// 隐藏
 			displayField : 'menuName',
 			allowBlank : false,
 			valueField : 'id',
-			value : '0',
+			//value : '-1',
 			queryMode : 'local',
-			//forceSelection : true,// 所选择的值必须是列表中的值
+			forceSelection : true,// 所选择的值必须是列表中的值
 			store : 'ParentMenuStore',
 			name : 'parentId',
 			listConfig : {// 下拉列表的样式
