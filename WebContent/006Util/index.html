@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 引入ext的样式 -->
+<link rel="styleSheet" type="text/css" href="../js/extJs/resources/css/ext-all.css" >
+<!-- 引入核心ext文件 -->
+<script type="text/javascript" src="../js/extJs/ext-all-debug.js"></script>
+<!-- 引入国际化文件 -->
+<script type="text/javascript" src="../js/extJs/ext-lang-zh_CN.js"></script>
+<!-- Css样式类 -->
+<script type="text/javascript" src="../006Util/CSS.js"></script>
+<!--点击事件触发类-->
+<script type="text/javascript" src="../006Util/ClickRepeater.js"></script>
+<!--延迟执行类-->
+<script type="text/javascript" src="../006Util/DelayedTask.js"></script>
+<!--格式化 类-->
+<script type="text/javascript" src="../006Util/Format.js"></script>
+<!--集合类-->
+<script type="text/javascript" src="../006Util/MixedCollection.js"></script>
+<!-- 多线程 -->
+<script type="text/javascript" src="../006Util/TaskRunner.js"></script>
+
+</head>
+<body>
+	<div align="center">
+		<br><div id="dl">鼠标悬停改变颜色</div>
+		
+		<br><br><br>
+		<div id="dd">点击后，鼠标悬停改变颜色</div><br>
+		<input type="button" value="change" id="but">
+		<br><br><br>
+		<div id="dc" class="d">点击后，移除背景颜色</div><br>
+		<input type="button" value="remove" id="but3">
+		<br><br><br>
+		获得焦点，按照指定时间重复执行
+		<input type="button" value="ClickRepeater" id="but4">
+		<br><br><br>
+		延迟执行
+		<input type="button" value="DelayedTask" id="but5">
+		
+		<br><br><br>
+		字符串超长处理（最少4个）
+		<input type="text" value="0123456789" name="str" id="str">&nbsp;&nbsp;
+		<input type="button" value="格式化" id="but6">
+		<br><br><br>
+		截取子串，索引为1，长度为3的子串
+		<input type="text" value="0123456789" name="str2" id="str2">&nbsp;&nbsp;
+		<input type="button" value="截取子串" id="but7">
+		<br><br><br>
+		首字母大写
+		<input type="text" value="redf" name="str3" id="str3">&nbsp;&nbsp;
+		<input type="button" value="首字母大写" id="but8">
+		<br><br><br>
+		字母都转化成小写
+		<input type="text" value="ASSW" name="str4" id="str4">&nbsp;&nbsp;
+		<input type="button" value="字母小写" id="but10">
+		<br><br><br>
+		字母都转化成大写
+		<input type="text" value="assw" name="str5" id="str5">&nbsp;&nbsp;
+		<input type="button" value="字母大写" id="but11">
+		<br><br><br>
+		格式化当前时间（yyyy-MM-dd）
+		<input type="button" value="格式化当前时间" id="but9">
+		<br><br><br>
+		格式数字（0,000.00）
+		<input type="text" value="1233456.34343" name="str12" id="str12">&nbsp;&nbsp;
+		<input type="button" value="格式数字" id="but12">
+		<br><br><br>
+		换行字符串格式化成HTML标签
+		<input type="button" value="换行字符串格式化成HTML标签" id="but13">
+		<br><br><br>
+		Ext.util.TaskRunner线程
+		<input type="text" value="" name="TaskRunner" id="str13">&nbsp;&nbsp;
+		<input type="button" value="开始线程" id="but15">
+		<input type="button" value="停止线程" id="but14">
+		
+		<br><br><br><br><br><br>
+	</div>
+</body>
+</html>
