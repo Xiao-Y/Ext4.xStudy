@@ -11,7 +11,6 @@ Ext.define('AM.view.Viewport',{
 //					},
 	items : [{
 		title : 'ExtJS案例',
-		collapisble : true,
 		region : 'north',
 		height : 100,
 		html : '<br><center><font size=5>MVC模式实现的ExtJS案例</font><br><font size=2>by XiaoY</font></center>'
@@ -19,8 +18,8 @@ Ext.define('AM.view.Viewport',{
 		title : '功能菜单',
 		region : 'west',
 		width : 200,
-		split : true,
-		collapisble : true,
+		split : true,//可以移动面板
+		collapsible: true,//实现折叠
 		xtype : 'panel',//为了显示滑动条
 		autoScroll:true,
 		items:[{
@@ -30,8 +29,7 @@ Ext.define('AM.view.Viewport',{
 		id : 'mainContent',
 		//title : '主题内容显示',
 		xtype:'tabpanel',
-		region : 'center',
-		collapisble : true
+		region : 'center'
 //		,
 //		contentEl : 'contentIframe'
 	},{
